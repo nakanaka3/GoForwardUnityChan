@@ -67,7 +67,7 @@ public class CubeGenerator : MonoBehaviour
         }
     }
     //●●●●
-    void OnCollisionEnter(Collision other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         //障害物に衝突した場合（追加）、もしキューブちゃんが当たった他のオブジェクトのタグがキューブか地面だったら…
         if (other.gameObject.tag == "CubeTag" || other.gameObject.tag == "GroundTag")
