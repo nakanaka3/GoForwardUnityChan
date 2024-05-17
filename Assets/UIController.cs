@@ -64,4 +64,6 @@ public class UIController : MonoBehaviour
         this.gameOverText.GetComponent<Text>().text = "Game Over";
         this.isGameOver = true;
     }
+
+
 }

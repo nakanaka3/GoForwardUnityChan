@@ -11,6 +11,9 @@ public class CubeController : MonoBehaviour
     // 消滅位置
     private float deadLine = -10;
 
+    // ●●●キューブ衝突ボリュームフラグ
+    private bool ColliderVolumeFlg = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,13 @@ public class CubeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //●●●追記
+        GetComponent<AudioSource>().volume = this.ColliderVolumeFlg ? 1 : 0;
+        if (ColliderVolumeFlg)
+        {
+            this.ColliderVolumeFlg = false;
+        }
+
         // キューブを移動させる●●TransformクラスのTranslate関数は引数に与えた値だけ現在の位置から移動させる（指定した値の座標に移動するわけではない！）第一引数から順にX軸方向、Y軸方向、Z軸方向の移動距離を指定
         // ●●Time.deltaTimeは前フレームからの経過時間を表します。フレームレートが高ければ小さく、フレームレートが低ければ大きくなる。Time.deltaTimeがない場合、フレームレートによって速度に差が生じる。
         transform.Translate(this.speed * Time.deltaTime, 0, 0);
@@ -30,5 +40,16 @@ public class CubeController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    //●●●障害物に衝突した場合（追加）、ボリュームフラグをトゥルー
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        this.ColliderVolumeFlg = true;
+        Debug.Log(this.ColliderVolumeFlg);
 
+        //ユニティちゃんと衝突した場合（追加）
+        if (collision.gameObject.tag == "UnityChan2DTag")
+        {
+            this.ColliderVolumeFlg = false;
+        }
+    }
 }

@@ -7,10 +7,6 @@ public class CubeGenerator : MonoBehaviour
     // キューブのPrefab
     public GameObject cubePrefab;
 
-    // キューブの音
-    public AudioClip block;
-
-    private AudioSource audioSource;
 
     // 時間計測用の変数
     private float delta = 0;
@@ -37,7 +33,7 @@ public class CubeGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -66,20 +62,5 @@ public class CubeGenerator : MonoBehaviour
             this.span = this.offsetX + this.spaceX * n;
         }
     }
-    //●●●●
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        //障害物に衝突した場合（追加）、もしキューブちゃんが当たった他のオブジェクトのタグがキューブか地面だったら…
-        if (other.gameObject.tag == "CubeTag" || other.gameObject.tag == "GroundTag")
-        {
-            // ●●●地面と設置したときにはボリュームを１にする（追加）
-            GetComponent<AudioSource>().volume = 1;
-        }
-        //ゴール地点に到達した場合（追加）
-        if (other.gameObject.tag == "UnityChan2DTag")
-        {
-            // ●●●地面と設置したときにはボリュームを１にする（追加）
-            GetComponent<AudioSource>().volume = 0;
-        }
-    }
+
 }
